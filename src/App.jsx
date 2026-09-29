@@ -5,6 +5,7 @@ import Syllabus from './pages/Syllabus'
 import Topic1 from './pages/Topic1'
 import Topic2 from './pages/Topic2'
 import Topic3 from './pages/Topic3'
+import Topic4 from './pages/Topic4'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/topic1" element={<Topic1 />} />
         <Route path="/topic2" element={<Topic2 />} />
         <Route path="/topic3" element={<Topic3 />} />
+        <Route path="/topic4" element={<Topic4 />} />
       </Routes>
     </>
   )
