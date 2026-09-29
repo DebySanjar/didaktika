@@ -214,28 +214,61 @@ const Topic2 = () => {
             <InfoCard>
               <p className="text-xl leading-relaxed mb-6">
                 Ta'lim jarayoni — bu <strong className="text-white">o'qituvchi va o'quvchining birgalikdagi</strong> maqsadga yo'naltirilgan faoliyati.
-                Bu jarayonda uchta asosiy komponent ishtirok etadi.
+                Bu jarayon tasodifiy emas — u aniq maqsad, mazmun va metodlar asosida quriladi.
+                Ta'lim jarayonida uchta asosiy komponent birga ishlaydi: biri yo'q bo'lsa, jarayon buziladi.
               </p>
-              
-              <div className="bg-zinc-800 p-6 rounded-xl">
-                <h4 className="text-amber-400 font-bold mb-4 text-lg">Ta'lim jarayonining "uch kuchi"</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="text-center p-4 bg-zinc-700 rounded-lg">
-                    <div className="text-4xl mb-2">👩‍🏫</div>
-                    <div className="font-bold text-white mb-1">O'qituvchi</div>
-                    <div className="text-zinc-400 text-sm">Bilim beruvchi</div>
-                  </div>
-                  <div className="text-center p-4 bg-zinc-700 rounded-lg">
-                    <div className="text-4xl mb-2">👨‍🎓</div>
-                    <div className="font-bold text-white mb-1">O'quvchi</div>
-                    <div className="text-zinc-400 text-sm">Bilim oluvchi</div>
-                  </div>
-                  <div className="text-center p-4 bg-zinc-700 rounded-lg">
-                    <div className="text-4xl mb-2">💡</div>
-                    <div className="font-bold text-white mb-1">Bilim</div>
-                    <div className="text-zinc-400 text-sm">Uzatiladigan kontent</div>
+
+              <div className="space-y-4 mb-6">
+                <div className="bg-zinc-800 p-5 rounded-xl">
+                  <div className="flex items-start gap-4">
+                    <div className="text-4xl">👩‍🏫</div>
+                    <div>
+                      <div className="font-bold text-white text-lg mb-1">O'qituvchi — tashkilotchi va yo'naltiruvchi</div>
+                      <p className="text-zinc-300 leading-relaxed">
+                        O'qituvchi shunchaki ma'lumot uzatuvchi emas. U ta'lim jarayonini rejalashtiradi,
+                        o'quvchini motivatsiyalaydi, bilimni tushunarli qilib tuzilmalaydi, natijani baholaydi
+                        va kerak bo'lsa yondashuvini o'zgartiradi. Yaxshi o'qituvchi o'quvchi nimani bilmasligini
+                        emas, <em>qanday qilib bilishga</em> yordam berish mumkinligini biladi.
+                      </p>
+                    </div>
                   </div>
                 </div>
+                <div className="bg-zinc-800 p-5 rounded-xl">
+                  <div className="flex items-start gap-4">
+                    <div className="text-4xl">👨‍🎓</div>
+                    <div>
+                      <div className="font-bold text-white text-lg mb-1">O'quvchi — faol ishtirokchi</div>
+                      <p className="text-zinc-300 leading-relaxed">
+                        O'quvchi passiv idish emas — uning ichiga bilim quyib bo'lmaydi.
+                        O'quvchi bilimni faol qurishga, savol berishga, xato qilishga va xatosidan o'rganishga tayyor bo'lishi kerak.
+                        Zamonaviy didaktika o'quvchini ta'lim jarayonining <strong className="text-white">markaziga</strong> qo'yadi —
+                        o'qituvchi esa yo'lni ko'rsatuvchi rolini bajaradi.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-zinc-800 p-5 rounded-xl">
+                  <div className="flex items-start gap-4">
+                    <div className="text-4xl">💡</div>
+                    <div>
+                      <div className="font-bold text-white text-lg mb-1">Bilim (mazmun) — o'rgatilayotgan narsa</div>
+                      <p className="text-zinc-300 leading-relaxed">
+                        Bu faqat faktlar va raqamlar emas. Bilim — tushunchalar, qonuniyatlar, ko'nikmalar,
+                        munosabatlar va qadriyatlarning yig'indisi. O'quv dasturlari aynan bilimning
+                        qaysi qismi, qaysi tartibda va qanday chuqurlikda o'rgatilishini belgilaydi.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-zinc-800 p-5 rounded-xl">
+                <p className="text-zinc-400 text-sm uppercase tracking-widest mb-3">Asosiy qoida</p>
+                <p className="text-white leading-relaxed">
+                  Agar uchta komponentdan biri yo'q bo'lsa: o'qituvchi tushuntiradi, lekin o'quvchi yo'q —
+                  bu <em>o'qitish</em>, ta'lim emas. O'quvchi o'qiydi, lekin mazmun yo'q — bu vaqt o'tkazish.
+                  Mazmun bor, lekin na o'qituvchi, na o'quvchi — bu faqat kutubxona.
+                </p>
               </div>
             </InfoCard>
 
@@ -295,55 +328,68 @@ const Topic2 = () => {
           <div className="space-y-6">
             <InfoCard>
               <p className="text-xl mb-6">
-                Bu uchta tushuncha ko'pincha <strong className="text-red-400">adashtirilib yuboriladi</strong>. 
-                Lekin ular orasida aniq farq bor — xuddi "bilaman", "qila olaman", "o'ylamasdan qilaman" kabi!
+                Bu uchta tushuncha ko'pincha <strong className="text-red-400">adashtirilib yuboriladi</strong>.
+                Lekin ular orasida aniq, o'lchanadigan farq bor. O'qituvchi sifatida bu farqni bilmaslik —
+                o'quvchiga noto'g'ri bosqichda noto'g'ri narsa o'rgatishga olib keladi.
               </p>
-              
+
               <div className="space-y-6">
                 {/* Bilim */}
-                <div className="bg-blue-900/30 border border-blue-500 p-6 rounded-xl">
+                <div className="bg-zinc-800 border-l-4 border-blue-500 p-6 rounded-r-xl">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-4xl">💡</span>
                     <h4 className="text-2xl font-bold text-blue-300">Bilim (Knowledge)</h4>
                   </div>
-                  <p className="text-zinc-300 text-lg mb-4">
-                    Voqelik haqidagi ma'lumotlar, faktlar, qonuniyatlar va tushunchalar. 
-                    Bu o'quvchining <em>"ma'lumotlar bazasi"</em> — nima bilishini ko'rsatadi.
+                  <p className="text-zinc-300 text-lg mb-4 leading-relaxed">
+                    Bilim — voqelik haqidagi ma'lumotlar, faktlar, tushunchalar va qonuniyatlarning
+                    ongli tarzda o'zlashtirilishi. Bu o'quvchining "ma'lumotlar bazasi" hisoblanadi.
+                    Bilim passiv xarakteri bilan ajralib turadi — u amaliy harakatni talab qilmaydi,
+                    lekin barcha ko'nikma va malakaning <strong className="text-white">asosi</strong> bo'lib xizmat qiladi.
+                    Bilim bo'lmasa — ko'nikma shakllanmaydi, zero quruq mashq anglanmagan narsani mustahkamlamaydi.
                   </p>
-                  <div className="bg-zinc-800 p-4 rounded-lg">
-                    <p className="text-zinc-400 text-sm mb-2">FORMULA:</p>
+                  <div className="bg-zinc-900 p-4 rounded-lg">
+                    <p className="text-zinc-400 text-sm mb-2">QANDAY SHAKLLANADI:</p>
                     <p className="text-white">📖 O'qish + 🧠 Tushunish + 💾 Esda saqlash = 💡 Bilim</p>
                   </div>
                 </div>
 
                 {/* Ko'nikma */}
-                <div className="bg-purple-900/30 border border-purple-500 p-6 rounded-xl">
+                <div className="bg-zinc-800 border-l-4 border-purple-500 p-6 rounded-r-xl">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-4xl">✋</span>
                     <h4 className="text-2xl font-bold text-purple-300">Ko'nikma (Skill)</h4>
                   </div>
-                  <p className="text-zinc-300 text-lg mb-4">
-                    Bilimni amalda qo'llash qobiliyati. Hali <em>ongli nazorat</em> talab qiladi — 
-                    har bir harakatni o'ylab bajarish kerak.
+                  <p className="text-zinc-300 text-lg mb-4 leading-relaxed">
+                    Ko'nikma — bilimni muayyan vaziyatda ongli nazorat ostida qo'llash qobiliyati.
+                    Ko'nikma shakllangan odam topshiriqni bajara oladi, lekin buning uchun
+                    <strong className="text-white"> diqqatini to'liq jamlashi</strong>, har bir qadamni o'ylab bajarishi kerak.
+                    Ko'nikma bilimdan farqli o'laroq, mashq talab qiladi — kitob o'qish yetmaydi,
+                    amalda sinab ko'rish kerak. Ko'nikma charchoq va stres sharoitida
+                    hali barqaror emas — bu uni malakadan ajratib turadigan asosiy belgi.
                   </p>
-                  <div className="bg-zinc-800 p-4 rounded-lg">
-                    <p className="text-zinc-400 text-sm mb-2">FORMULA:</p>
-                    <p className="text-white">💡 Bilim + 🔄 Mashq qilish + ⏰ Vaqt = ✋ Ko'nikma</p>
+                  <div className="bg-zinc-900 p-4 rounded-lg">
+                    <p className="text-zinc-400 text-sm mb-2">QANDAY SHAKLLANADI:</p>
+                    <p className="text-white">💡 Bilim + 🔄 Amaliy mashq + ⏰ Vaqt = ✋ Ko'nikma</p>
                   </div>
                 </div>
 
                 {/* Malaka */}
-                <div className="bg-amber-900/30 border border-amber-500 p-6 rounded-xl">
+                <div className="bg-zinc-800 border-l-4 border-amber-500 p-6 rounded-r-xl">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-4xl">🏆</span>
-                    <h4 className="text-2xl font-bold text-amber-300">Malaka (Habit/Mastery)</h4>
+                    <h4 className="text-2xl font-bold text-amber-300">Malaka (Mastery / Habit)</h4>
                   </div>
-                  <p className="text-zinc-300 text-lg mb-4">
-                    Ko'p marta takrorlash natijasida <em>avtomatik</em> tus olgan ko'nikma. 
-                    Endi o'ylamasdan, refleksga o'xshab bajariladi.
+                  <p className="text-zinc-300 text-lg mb-4 leading-relaxed">
+                    Malaka — ko'p marta takrorlash natijasida avtomatlashgan ko'nikma.
+                    Malakali odam topshiriqni <strong className="text-white">ongli nazoratisiz</strong> bajaradi —
+                    xuddi refleks kabi. Bu miya neyronlari darajasida mustahkamlangan yo'l hisoblanadi:
+                    psixologlar buni "muskullar xotirasi" (muscle memory) deydi.
+                    Malaka charchoq, stres va chalg'ituvchi omillar ostida ham barqaror qoladi —
+                    aynan shu xususiyat uni ko'nikmadan ajratib turadi. Malaka shakllanishi
+                    uchun taxminan 10 000 soat amaliyot kerak (Malcolm Gladwell tadqiqoti).
                   </p>
-                  <div className="bg-zinc-800 p-4 rounded-lg">
-                    <p className="text-zinc-400 text-sm mb-2">FORMULA:</p>
+                  <div className="bg-zinc-900 p-4 rounded-lg">
+                    <p className="text-zinc-400 text-sm mb-2">QANDAY SHAKLLANADI:</p>
                     <p className="text-white">✋ Ko'nikma + 🔁 Ko'p takror + ⏳ Uzoq vaqt = 🏆 Malaka</p>
                   </div>
                 </div>
@@ -411,56 +457,71 @@ const Topic2 = () => {
           <div className="space-y-6">
             <InfoCard>
               <p className="text-xl mb-6">
-                Ko'plar bu tushunchalarni <strong className="text-red-400">sinonim</strong> deb o'ylaydi. Aslida ular 
-                <strong className="text-white"> har xil jarayonlarni</strong> ifodalaydi!
+                Ko'plar bu tushunchalarni <strong className="text-red-400">sinonim</strong> deb o'ylaydi.
+                Aslida ular uchta alohida jarayonni ifodalaydi — har birining o'z sub'ekti, o'z maqsadi va o'z qonuniyatlari bor.
+                Bu farqni bilmaydigan o'qituvchi "men dars o'tdim" deganida ta'lim bo'ldi deb o'ylaydi —
+                aslida esa faqat o'qitish bo'lgan bo'lishi mumkin.
               </p>
 
               <div className="space-y-6">
                 {/* Ta'lim */}
-                <div className="bg-emerald-900/30 border border-emerald-500 p-6 rounded-xl">
+                <div className="bg-zinc-800 border-l-4 border-emerald-500 p-6 rounded-r-xl">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-4xl">🎓</span>
                     <h4 className="text-2xl font-bold text-emerald-300">Ta'lim (Education)</h4>
                   </div>
-                  <p className="text-zinc-300 text-lg mb-4">
-                    O'qituvchi va o'quvchining <strong>birgalikdagi</strong> maqsadga yo'naltirilgan faoliyati. 
-                    Bu ikki tomonlama jarayon — <em>ikkalasi ham faol</em>!
+                  <p className="text-zinc-300 text-lg mb-4 leading-relaxed">
+                    Ta'lim — o'qituvchi va o'quvchining <strong className="text-white">birgalikdagi, ikki tomonlama</strong>
+                    maqsadga yo'naltirilgan faoliyati. Bu yerda ikkalasi ham faol: o'qituvchi
+                    tushuntiradi, o'quvchi savollar beradi, muhokama ketadi, fikr almashiladi.
+                    Ta'lim natijasida o'quvchi nafaqat bilim oladi, balki fikrlash usulini, munosabatini
+                    va dunyoqarashini ham shakllantiradi. Shuning uchun "ta'lim" so'zi "tarbiya" tushunchasini
+                    ham o'z ichiga oladi — bu pedagogikaning eng keng kategoriyasi.
                   </p>
-                  <div className="bg-zinc-800 p-4 rounded-lg">
+                  <div className="bg-zinc-900 p-4 rounded-lg">
                     <p className="text-zinc-400 text-sm mb-2">KIM ISHTIROK ETADI:</p>
-                    <p className="text-white">👩‍🏫 O'qituvchi + 👨‍🎓 O'quvchi = 🎓 Ta'lim</p>
+                    <p className="text-white">👩‍🏫 O'qituvchi + 👨‍🎓 O'quvchi (ikkalasi faol) = 🎓 Ta'lim</p>
                   </div>
                 </div>
 
                 {/* O'qitish */}
-                <div className="bg-orange-900/30 border border-orange-500 p-6 rounded-xl">
+                <div className="bg-zinc-800 border-l-4 border-orange-500 p-6 rounded-r-xl">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-4xl">👩‍🏫</span>
                     <h4 className="text-2xl font-bold text-orange-300">O'qitish (Teaching)</h4>
                   </div>
-                  <p className="text-zinc-300 text-lg mb-4">
-                    Faqat <strong>o'qituvchi tomonidagi</strong> faoliyat. Bilimni tashkil etish, 
-                    tushuntirish va uzatish. O'quvchi bor-yo'qligi muhim emas.
+                  <p className="text-zinc-300 text-lg mb-4 leading-relaxed">
+                    O'qitish — faqat <strong className="text-white">o'qituvchi tomonidagi</strong> faoliyat:
+                    bilimni tashkil etish, tizimlashtirish, tushuntirish va o'quvchiga yetkazishga urinish.
+                    O'qitish bo'lishi uchun o'quvchining o'rganishi shart emas — o'qituvchi
+                    monolog tarzida gapirishi ham o'qitish hisoblanadi. Mashhur misol:
+                    o'qituvchi ajoyib dars o'tadi, lekin o'quvchilar telefon bilan band —
+                    o'qitish sodir bo'ldi, ta'lim esa yo'q.
+                    O'qitish samarali bo'lishi uchun u <em>o'rganishni qo'zg'atishi</em> kerak.
                   </p>
-                  <div className="bg-zinc-800 p-4 rounded-lg">
+                  <div className="bg-zinc-900 p-4 rounded-lg">
                     <p className="text-zinc-400 text-sm mb-2">KIM ISHTIROK ETADI:</p>
-                    <p className="text-white">👩‍🏫 Faqat o'qituvchi = 📝 O'qitish</p>
+                    <p className="text-white">👩‍🏫 Faqat o'qituvchi faol = 📝 O'qitish</p>
                   </div>
                 </div>
 
                 {/* O'rganish */}
-                <div className="bg-cyan-900/30 border border-cyan-500 p-6 rounded-xl">
+                <div className="bg-zinc-800 border-l-4 border-cyan-500 p-6 rounded-r-xl">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-4xl">👨‍🎓</span>
                     <h4 className="text-2xl font-bold text-cyan-300">O'rganish (Learning)</h4>
                   </div>
-                  <p className="text-zinc-300 text-lg mb-4">
-                    Faqat <strong>o'quvchi tomonidagi</strong> faoliyat. Bilimni qabul qilish, 
-                    tushunish va o'zlashtirish. O'qituvchi bo'lmasligi ham mumkin.
+                  <p className="text-zinc-300 text-lg mb-4 leading-relaxed">
+                    O'rganish — faqat <strong className="text-white">o'quvchi tomonidagi</strong> ichki jarayon:
+                    yangi ma'lumotni qabul qilish, mavjud bilimlar bilan bog'lash, tushunish va
+                    xotirada saqlash. O'rganish o'qituvchisiz ham sodir bo'ladi — bola mustaqil
+                    kitob o'qiganda, YouTube videosini ko'rganda yoki hayotiy tajriba orqali o'rganganda.
+                    O'rganish — aslida miyaning o'zi bajaradigan ish, uni tashqaridan to'liq boshqarish mumkin emas.
+                    O'qituvchi faqat buning <em>sharoitini yaratadi</em>.
                   </p>
-                  <div className="bg-zinc-800 p-4 rounded-lg">
+                  <div className="bg-zinc-900 p-4 rounded-lg">
                     <p className="text-zinc-400 text-sm mb-2">KIM ISHTIROK ETADI:</p>
-                    <p className="text-white">👨‍🎓 Faqat o'quvchi = 📚 O'rganish</p>
+                    <p className="text-white">👨‍🎓 Faqat o'quvchi faol = 📚 O'rganish</p>
                   </div>
                 </div>
               </div>

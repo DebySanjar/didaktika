@@ -191,6 +191,13 @@ const Topic1 = () => {
                 U o'qituvchi <em>nima</em> o'rgatishi kerak emas, balki
                 <strong className="text-white"> qanday</strong> o'rgatishi kerakligini belgilaydi.
               </p>
+              <p className="text-zinc-300 leading-relaxed mt-4">
+                Boshqacha aytganda, didaktika — bu ta'lim jarayonining <strong className="text-white">ilmiy asosi</strong>.
+                U tajribaga tayangan o'qituvchilik san'atini tizimlashtirib, qonuniyatlarga aylantiradi.
+                Masalan: "O'quvchi yangi mavzuni oldingi bilimlarga bog'laganda yaxshiroq o'zlashtiradi" —
+                bu oddiy kuzatuv emas, balki didaktik tamoyil. Va bu tamoyil asosida minglab o'qituvchilar
+                darslarini loyihalaydi.
+              </p>
               <div className="mt-6 p-5 bg-zinc-800 rounded-xl">
                 <p className="text-zinc-400 text-sm uppercase tracking-widest mb-3">So'zning kelib chiqishi</p>
                 <div className="flex flex-wrap items-center gap-3 text-base">
@@ -201,11 +208,20 @@ const Topic1 = () => {
                   <span className="text-zinc-300 italic">"o'rgatuvchi, tushuntiruvchi"</span>
                 </div>
               </div>
-              <div className="mt-6 p-5 bg-zinc-800 rounded-xl">
-                <p className="text-zinc-400 text-sm uppercase tracking-widest mb-3">Ta'rif</p>
-                <p className="text-zinc-200">
-                  Didaktika deyilganda — ta'lim va o'qitishning <strong className="text-white">maqsadlari, mazmuni, tamoyillari, usullari,
-                  vositalari va tashkiliy shakllarini</strong> ilmiy asosda o'rganuvchi fan tushuniladi.
+              <div className="mt-4 p-5 bg-zinc-800 rounded-xl">
+                <p className="text-zinc-400 text-sm uppercase tracking-widest mb-3">Rasmiy ta'rif</p>
+                <p className="text-zinc-200 leading-relaxed">
+                  Didaktika — ta'lim va o'qitishning <strong className="text-white">maqsadlari, mazmuni, tamoyillari,
+                  usullari, vositalari va tashkiliy shakllarini</strong> ilmiy asosda o'rganuvchi fan.
+                  Uning predmeti: o'qituvchi va o'quvchi o'rtasidagi ta'lim jarayoni va uning qonuniyatlari.
+                </p>
+              </div>
+              <div className="mt-4 p-5 bg-zinc-800 rounded-xl">
+                <p className="text-zinc-400 text-sm uppercase tracking-widest mb-3">Didaktika nimani o'rganmaydi?</p>
+                <p className="text-zinc-300 leading-relaxed">
+                  Didaktika bolaning shaxsiy tarbiyasi, axloqiy rivojlanishi yoki sinfda intizom
+                  masalalari bilan shug'ullanmaydi — bu pedagogikaning boshqa tarmoqlari (tarbiya nazariyasi,
+                  ta'lim psixologiyasi) sohasidir. Didaktika faqat <em>o'qitish-o'rganish jarayoni</em> bilan band.
                 </p>
               </div>
             </InfoCard>
@@ -262,23 +278,35 @@ const Topic1 = () => {
               <p className="text-xl mb-6">
                 Didaktikaning predmeti — bu <strong className="text-white">ta'lim jarayoni</strong>:
                 o'qituvchi va o'quvchining o'zaro birgalikdagi maqsadga yo'naltirilgan faoliyati.
+                "Predmet" deganda — fanning aynan nima bilan shug'ullanishi tushuniladi.
+                Didaktika ta'lim jarayonini har tomonlama tekshiradi: uni qanday tashkil qilish kerak,
+                nimaga asoslanishi kerak, qanday natija berishi kerak.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-zinc-800 rounded-xl p-5 text-center">
                   <div className="text-4xl mb-3">👩‍🏫</div>
                   <div className="font-bold text-white mb-1">O'qituvchi</div>
-                  <div className="text-zinc-400 text-sm">O'qitish faoliyati</div>
+                  <div className="text-zinc-400 text-sm">O'qitish faoliyati — bilimni tashkil etish, yetkazish, baholash</div>
                 </div>
                 <div className="bg-zinc-700 rounded-xl p-5 text-center border border-amber-500">
                   <div className="text-4xl mb-3">🔄</div>
                   <div className="font-bold text-amber-400 mb-1">Ta'lim jarayoni</div>
-                  <div className="text-zinc-300 text-sm">Didaktika predmeti</div>
+                  <div className="text-zinc-300 text-sm">Didaktika predmeti — ikki tomonlama faoliyat</div>
                 </div>
                 <div className="bg-zinc-800 rounded-xl p-5 text-center">
                   <div className="text-4xl mb-3">👨‍🎓</div>
                   <div className="font-bold text-white mb-1">O'quvchi</div>
-                  <div className="text-zinc-400 text-sm">O'qish faoliyati</div>
+                  <div className="text-zinc-400 text-sm">O'qish faoliyati — qabul qilish, tushunish, qo'llash</div>
                 </div>
+              </div>
+              <div className="bg-zinc-800 p-5 rounded-xl mb-4">
+                <p className="text-zinc-400 text-sm uppercase tracking-widest mb-3">Nima uchun bu predmet muhim?</p>
+                <p className="text-zinc-300 leading-relaxed">
+                  Ko'p o'qituvchilar predmetlarini mukammal biladi — lekin o'quvchilar
+                  o'zlashtirolmaydi. Sababi: predmetni bilish va uni <em>o'rgatishni</em> bilish —
+                  ikki xil narsa. Didaktika aynan o'qituvchiga ikkinchi qismni — <strong className="text-white">ta'lim jarayonini
+                  tushunishni</strong> o'rgatadi.
+                </p>
               </div>
             </InfoCard>
 
@@ -286,16 +314,17 @@ const Topic1 = () => {
               <p className="font-bold text-white text-lg mb-4">Didaktika quyidagi savollarga javob beradi:</p>
               <div className="space-y-3">
                 {[
-                  { q: 'Nima uchun o\'qitish kerak?', a: 'Ta\'lim maqsadlari va vazifalari' },
-                  { q: 'Nimani o\'qitish kerak?', a: 'Ta\'lim mazmuni va o\'quv dasturlari' },
-                  { q: 'Qanday o\'qitish kerak?', a: 'Metodlar, shakllar va vositalar' },
-                  { q: 'Qanday natijaga erishildi?', a: 'Ta\'lim samaradorligi va nazorat' },
+                  { q: 'Nima uchun o\'qitish kerak?', a: 'Ta\'lim maqsadlari va vazifalari', detail: 'Jamiyat, davlat va shaxsning ehtiyojlaridan kelib chiqib ta\'lim maqsadlari belgilanadi.' },
+                  { q: 'Nimani o\'qitish kerak?', a: 'Ta\'lim mazmuni va o\'quv dasturlari', detail: 'Qaysi bilim, ko\'nikma va malakalar o\'rgatilishi kerakligi aniqlanadi.' },
+                  { q: 'Qanday o\'qitish kerak?', a: 'Metodlar, shakllar va vositalar', detail: 'Ma\'ruza, suhbat, loyiha, muammo — qaysi usul qachon samarali?' },
+                  { q: 'Qanday natijaga erishildi?', a: 'Ta\'lim samaradorligi va nazorat', detail: 'Test, kuzatuv, portfolio — o\'quvchi haqiqatan o\'zdimi?' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 p-4 bg-zinc-800 rounded-xl">
                     <span className="text-amber-400 font-black text-lg flex-shrink-0">?</span>
                     <div>
                       <p className="text-white font-semibold">{item.q}</p>
                       <p className="text-zinc-400 text-sm mt-1">→ {item.a}</p>
+                      <p className="text-zinc-500 text-sm mt-1 italic">{item.detail}</p>
                     </div>
                   </div>
                 ))}
