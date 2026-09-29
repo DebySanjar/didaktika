@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Nunito:wght@400;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+body {
+  background: #0f172a;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #2563eb, #9333ea, #db2777);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border-radius: 1rem;
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #2563eb, #9333ea);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  color: #1f2937;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  background: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+}
+
+/* 3D Flip Card Effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.group:hover .group-hover\:rotate-y-180 {
+  transform: rotateY(180deg);
+}
