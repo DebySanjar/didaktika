@@ -6,7 +6,7 @@ const PresentationNav = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const routes = ['/', '/syllabus', '/topic1', '/topic2', '/topic3']
+  const routes = ['/', '/syllabus', '/topic1', '/topic2', '/topic3', '/topic4', '/topic5']
   const currentIndex = routes.indexOf(location.pathname)
 
   useEffect(() => {
@@ -68,6 +68,8 @@ const PresentationNav = () => {
                 {index === 2 && 'Mavzu 1'}
                 {index === 3 && 'Mavzu 2'}
                 {index === 4 && 'Mavzu 3'}
+                {index === 5 && 'Mavzu 4'}
+                {index === 6 && 'Mavzu 5'}
               </div>
             </div>
           </button>
