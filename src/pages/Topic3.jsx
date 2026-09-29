@@ -1,499 +1,585 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import ReadyScreen from '../components/ReadyScreen'
 
-const Topic3 = () => {
-  const [showReady, setShowReady] = useState(true)
-  const [selectedAnswer, setSelectedAnswer] = useState(null)
-  const [showResult, setShowResult] = useState(false)
-  const [completedCourse, setCompletedCourse] = useState(false)
-  const navigate = useNavigate()
-
-  const eras = [
-    {
-      id: 1,
-      period: 'Qadimgi davr',
-      icon: '🏛️',
-      color: 'from-amber-400 to-orange-500',
-      bgColor: 'from-amber-50 to-orange-50',
-      scholars: 'Sokrat, Platon, Aristotel',
-      method: 'Suhbat va savol-javob (Sokrat usuli)',
-      description: 'O\'qitishning asosiy usuli — savollar orqali o\'quvchini o\'zi fikrlashga undash.',
-      quote: '"Sen nima deb o\'ylaysan? Nima uchun?" — Sokrat',
-      meme: 'Sokrat: "Bilmayman deysan, lekin men ham bilmayman — ikkalamiz ham bilmas ekanmiz. Ammo men bu haqda bilaman 🤓"',
-      alignment: 'left'
-    },
-    {
-      id: 2,
-      period: 'O\'rta Asrlar',
-      icon: '⛪',
-      color: 'from-purple-400 to-indigo-500',
-      bgColor: 'from-purple-50 to-indigo-50',
-      scholars: 'Ibn Sino, Al-Farobiy',
-      method: 'Sxolastika va dogmatik ta\'lim',
-      description: 'Diniy matnlarni yodlash va talqin qilish. O\'quvchi savollamaydi — faqat qabul qiladi.',
-      quote: '"Bu shunday, chunki kitobda shunday yozilgan." — Muallim',
-      meme: 'O\'quvchi: "Nega yer yumaloq?" \nMuallim: "O\'tir, imtihondan o\'tasan — tushunmaysan, yodlaysan" 🧏',
-      alignment: 'right'
-    },
-    {
-      id: 3,
-      period: 'Uyg\'onish davri',
-      icon: '🌱',
-      color: 'from-green-400 to-teal-500',
-      bgColor: 'from-green-50 to-teal-50',
-      scholars: 'Jan Amos Komenskiy',
-      method: 'Sinf-dars tizimi, sistemali ta\'lim',
-      description: 'Zamonaviy didaktikaning asoschisi. "Buyuk didaktika" asarida: Hammaga hamma narsani o\'rgatish mumkin!',
-      quote: '"Tabiatga mos ta\'lim" — Komenskiy',
-      principles: ['✅ Sinf-dars tizimi', '✅ Yil bo\'yi o\'qish', '✅ Vizual o\'rgatish', '✅ Tabiatga mos ta\'lim'],
-      meme: 'Komenskiy: "Rasmli darsliklar yasaymiz!" \nHamma: "Bu bid\'at!" \nKomenskiy: "400 yildan keyin barchangiz YouTube ko\'rasizlar 😎"',
-      alignment: 'left'
-    },
-    {
-      id: 4,
-      period: 'XIX–XX Asr',
-      icon: '🏭',
-      color: 'from-blue-400 to-cyan-500',
-      bgColor: 'from-blue-50 to-cyan-50',
-      scholars: 'Pestalotsi, Dyui, Vygotskiy',
-      method: 'Tajriba orqali o\'rganish, ijtimoiy ta\'lim',
-      description: 'Pestalotsi — qo\'l mehnati + aqliy rivojlanish. Dyui — "Learning by doing". Vygotskiy — yaqin rivojlanish zonasi.',
-      scientists: [
-        { name: 'Pestalotsi 🇨🇭', idea: 'Bosh + Qo\'l + Yurak' },
-        { name: 'Dyui 🇺🇸', idea: 'Learning by doing' },
-        { name: 'Vygotskiy 🇷🇺', idea: 'Yaqin rivojlanish zonasi' }
-      ],
-      alignment: 'right'
-    },
-    {
-      id: 5,
-      period: 'XXI Asr — Hozir',
-      icon: '🤖',
-      color: 'from-pink-400 to-rose-500',
-      bgColor: 'from-pink-50 to-rose-50',
-      scholars: 'AI va raqamli ta\'lim',
-      method: 'Blended learning, Flipped classroom, AI tools',
-      description: 'ChatGPT, Khanmigo, Duolingo — bularning hammasi didaktika tamoyillariga asoslanishi kerak!',
-      quote: '"Texnologiya — vosita, didaktika — asos" — Zamonaviy qarash',
-      meme: 'O\'quvchi: "ChatGPTdan uy vazifasini yozdirib oldim 😎" \nDidaktika: "Yaxshi! Endi tushun, so\'ngra o\'zing yoz — yokhud AI seni boshqaradi 🤖"',
-      alignment: 'left'
-    }
-  ]
-
-  const comparisonData = [
-    {
-      period: 'Qadimgi',
-      approach: 'Suhbat, savol-javob',
-      center: '👨‍🏫 O\'qituvchi',
-      weakness: 'Faqat elita uchun',
-      chip: 'amber'
-    },
-    {
-      period: 'O\'rta asr',
-      approach: 'Yodlash, takrorlash',
-      center: '📖 Matn',
-      weakness: 'Ijodkorlik yo\'q',
-      chip: 'purple'
-    },
-    {
-      period: 'Renessans',
-      approach: 'Tizimli ta\'lim',
-      center: '🏫 Sinf-dars',
-      weakness: 'Individual yondashuv kam',
-      chip: 'green'
-    },
-    {
-      period: 'XIX–XX',
-      approach: 'Tajriba, faoliyat',
-      center: '👨‍🎓 O\'quvchi',
-      weakness: 'Tizimlilik etishmaydi',
-      chip: 'blue'
-    },
-    {
-      period: 'XXI asr',
-      approach: 'Gibrid, AI-yordamchi',
-      center: '🤝 Hamkorlik',
-      weakness: 'Raqamli tengsizlik',
-      chip: 'pink',
-      highlight: true
-    }
-  ]
-
-  const chipColors = {
-    amber: 'bg-amber-100 text-amber-800',
-    purple: 'bg-purple-100 text-purple-800',
-    green: 'bg-green-100 text-green-800',
-    blue: 'bg-blue-100 text-blue-800',
-    pink: 'bg-pink-100 text-pink-800'
-  }
-
-  const handleAnswer = (answerId) => {
-    setSelectedAnswer(answerId)
-    setShowResult(true)
-  }
-
-  const handleComplete = () => {
-    setCompletedCourse(true)
-    setTimeout(() => {
-      navigate('/')
-    }, 5000)
-  }
+// ─── Quiz Component ───────────────────────────────────────────────────────────
+const Quiz = ({ question, options, correctIndex, explanation }) => {
+  const [selected, setSelected] = useState(null)
 
   return (
-    <>
+    <div className="bg-zinc-900 border border-zinc-700 rounded-2xl p-8">
+      <div className="flex items-center gap-3 mb-6">
+        <span className="text-3xl">🧩</span>
+        <h4 className="text-xl font-bold text-white">Bilimni tekshir</h4>
+      </div>
+      <p className="text-lg text-zinc-200 font-medium mb-6">{question}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        {options.map((opt, i) => {
+          let style = 'bg-zinc-800 border border-zinc-600 text-zinc-200 hover:border-zinc-400'
+          if (selected !== null) {
+            if (i === correctIndex) style = 'bg-green-900 border-2 border-green-500 text-green-200'
+            else if (i === selected) style = 'bg-red-900 border-2 border-red-500 text-red-200'
+            else style = 'bg-zinc-800 border border-zinc-700 text-zinc-500 opacity-60'
+          }
+          return (
+            <button
+              key={i}
+              disabled={selected !== null}
+              onClick={() => setSelected(i)}
+              className={`p-4 rounded-xl text-left font-medium transition-all ${style} ${selected === null ? 'cursor-pointer' : 'cursor-default'}`}
+            >
+              {opt}
+            </button>
+          )
+        })}
+      </div>
       <AnimatePresence>
-        {showReady && (
-          <ReadyScreen
-            topicNumber="03"
-            topicTitle="Tarixiy Davrlarda Didaktik Tizimlar"
-            onComplete={() => setShowReady(false)}
-          />
+        {selected !== null && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`p-4 rounded-xl mt-2 ${selected === correctIndex ? 'bg-green-900/50 border border-green-600' : 'bg-red-900/50 border border-red-600'}`}
+          >
+            <p className={`font-semibold ${selected === correctIndex ? 'text-green-300' : 'text-red-300'}`}>
+              {selected === correctIndex ? '✅ To\'g\'ri!' : `❌ Noto'g'ri. To'g'ri javob: "${options[correctIndex]}"`}
+            </p>
+            {explanation && <p className="text-zinc-400 text-sm mt-2">{explanation}</p>}
+          </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  )
+}
 
-      {!showReady && !completedCourse && (
-        <div className="min-h-screen py-12 px-4">
-          <div className="max-w-6xl mx-auto">
+// ─── Section Divider ──────────────────────────────────────────────────────────
+const SectionTitle = ({ number, title }) => (
+  <div className="flex items-center gap-4 mb-8">
+    <span className="text-5xl font-black text-zinc-700 font-mono">{number}</span>
+    <div className="flex-1 h-px bg-zinc-700"></div>
+    <h2 className="text-2xl md:text-3xl font-black text-white">{title}</h2>
+    <div className="flex-1 h-px bg-zinc-700"></div>
+  </div>
+)
 
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-12"
-            >
-              <div className="flex items-center space-x-4 mb-6">
-                <div className="text-7xl font-black text-gray-200">03</div>
-                <div>
-                  <div className="px-3 py-1 bg-green-100 text-green-700 text-sm font-semibold rounded-full inline-block mb-2">
-                    Reja 3
-                  </div>
-                  <h1 className="text-4xl md:text-5xl font-black text-gray-900">
-                    Turli Tarixiy Davrlarda <br />
-                    <span className="gradient-text">Didaktik Tizimlar</span>
-                  </h1>
+// ─── Meme Card ────────────────────────────────────────────────────────────────
+const MemeCard = ({ src, alt, topText, bottomText, caption }) => (
+  <div className="bg-zinc-900 border border-zinc-700 rounded-2xl overflow-hidden max-w-2xl mx-auto">
+    <div className="relative">
+      <img src={src} alt={alt} className="w-full object-cover" style={{ maxHeight: '480px' }} />
+      {topText && (
+        <div className="absolute top-3 left-0 right-0 flex justify-center px-4">
+          <p className="text-white font-black text-xl md:text-2xl text-center uppercase"
+            style={{ textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000' }}>
+            {topText}
+          </p>
+        </div>
+      )}
+      {bottomText && (
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center px-4">
+          <p className="text-white font-black text-xl md:text-2xl text-center uppercase"
+            style={{ textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000' }}>
+            {bottomText}
+          </p>
+        </div>
+      )}
+    </div>
+    {caption && (
+      <div className="p-4 bg-zinc-800 text-center border-t border-zinc-700">
+        <p className="text-zinc-400 text-sm">{caption}</p>
+      </div>
+    )}
+  </div>
+)
+
+// ─── Example Block ────────────────────────────────────────────────────────────
+const Example = ({ icon, title, children }) => (
+  <div className="border-l-4 border-amber-500 bg-zinc-900/60 p-6 rounded-r-2xl">
+    <div className="flex items-center gap-2 mb-3">
+      <span className="text-2xl">{icon}</span>
+      <span className="text-amber-400 font-bold text-sm uppercase tracking-widest">Misol uchun</span>
+      {title && <span className="text-zinc-400 text-sm">— {title}</span>}
+    </div>
+    <div className="text-zinc-200 text-base leading-relaxed">{children}</div>
+  </div>
+)
+
+// ─── Info Card ────────────────────────────────────────────────────────────────
+const InfoCard = ({ children }) => (
+  <div className="bg-zinc-900 border border-zinc-700 rounded-2xl p-8 text-zinc-200 leading-relaxed">
+    {children}
+  </div>
+)
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TOPIC 3 PAGE
+// ═══════════════════════════════════════════════════════════════════════════════
+const Topic3 = () => {
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-4xl mx-auto px-4 py-16 space-y-20">
+
+        {/* ── PAGE HEADER ── */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center"
+        >
+          <p className="text-zinc-500 text-sm uppercase tracking-widest mb-4">Reja 03</p>
+          <h1 className="text-5xl md:text-7xl font-black text-white leading-tight mb-4">
+            Turli Tarixiy<br />Davrlarda<br />
+            <span className="text-zinc-400">Didaktik Tizimlar</span>
+          </h1>
+          <div className="w-24 h-1 bg-white mx-auto mt-6"></div>
+        </motion.div>
+
+        {/* ══════════════════════════════════════════════
+            BLOK 1 — QADIMGI DAVR
+        ══════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionTitle number="01" title="Qadimgi davr — Sokrat, Platon, Aristotel" />
+
+          <div className="space-y-6">
+            <InfoCard>
+              <p className="text-xl leading-relaxed mb-6">
+                Qadimgi Yunonistonda ta'lim bizga tushuncha sifatida tanish bo'lgan maktab tizimidan mutlaqo boshqacha ko'rinishda mavjud edi.
+                O'qitish ko'chada, bozorda, ibodatxona oldida — hayotning o'zida sodir bo'lardi. Eng muhimi,
+                bu jarayon <strong className="text-white">dialog</strong> shaklida, ya'ni savol-javob orqali amalga oshirilardi.
+              </p>
+
+              <div className="space-y-5">
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🏛️ Sokrat usuli — Mayevtika</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Sokrat (miloddan avvalgi 470–399) hech qachon tayyor javob bermagan. U shogirdlariga ketma-ket savollar berib,
+                    ularni o'zlari to'g'ri xulosaga kelishga majbur qilgan. Bu usul <em>mayevtika</em> deb atalib,
+                    yunoncha "duoya yordam berish" degan ma'noni anglatadi — xuddi aqldagi bilimni "tug'dirishga" yordam berish kabi.
+                    Sokrat: "Men hech narsani bilmayman, lekin men bu haqda bilaman" — deydi. Bu o'z-o'zini
+                    tanqid qilish va izlanish ruhini shakllantirishning eng qadimgi namunasi.
+                  </p>
+                </div>
+
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">📚 Platon — Akademiya</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Platon (miloddan avvalgi 428–348) o'z ustozi Sokratning usulini yanada rivojlantirdi va miloddan avvalgi 387-yilda
+                    tarixdagi birinchi oliy o'quv yurtlaridan biri — Akademiyani tashkil etdi. U ta'limni ikki bosqichga ajratdi:
+                    avval jismoniy va musiqiy tarbiya, so'ngra matematik va falsafiy fanlar.
+                    Platonning asosiy g'oyasi: ta'lim — bu ruhni haqiqatga yo'naltirish jarayoni, shunchaki ma'lumot berish emas.
+                  </p>
+                </div>
+
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🔬 Aristotel — Litsey va kuzatuv</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Aristotel (miloddan avvalgi 384–322) Platonning shogirdi bo'lishiga qaramasdan,
+                    o'z ilmiy maktabini — Litseyni tashkil etdi. U ta'limga yangi yondashuv olib kirdi:
+                    bilim faqat fikr yuritish orqali emas, <strong className="text-white">tabiatni kuzatish va tajriba</strong> orqali
+                    ham olinishi mumkin. Aristotel mantiq, biologiya, etika, siyosat fanlarini birinchi marta tizimli o'rgatdi.
+                    Uning o'quvchilaridan biri — Iskandar Zulqarnayn, ya'ni Makedoniyalik Aleksandr edi.
+                  </p>
                 </div>
               </div>
-            </motion.div>
+            </InfoCard>
 
-            {/* Intro */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="glass-card p-6 mb-12"
-            >
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Ta'lim har doim ham bugungiday bo'lmagan. Keling,
-                <strong className="text-purple-600"> 2000 yillik tarixiy sayohat</strong> qilaylik —
-                va har davrda "meme'lar" ham bor edi, shunchaki rasmga tushirilmagan xolos 😄
+            <Example icon="🗣️" title="Sokrat usuli hozir ham ishlaydi">
+              Yaxshi o'qituvchi: "Bu formulani eslang" — demaydi.<br />
+              Yaxshi o'qituvchi: "Agar tezlik oshsa, vaqt o'zgaradimi? Nima uchun?" — deb so'raydi.<br /><br />
+              O'quvchi o'zi fikrlab javobga kelsa — bu bilim uzoq vaqt esda qoladi.
+              Bu aynan Sokratning 2500 yil oldin ishlatgan usuli. Zamonaviy pedagogika uni
+              <strong className="text-amber-300"> "muammoli ta'lim"</strong> deb ataydi.
+            </Example>
+          </div>
+        </motion.div>
+
+        {/* ══════════════════════════════════════════════
+            BLOK 2 — O'RTA ASRLAR
+        ══════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionTitle number="02" title="O'rta asrlar — Sxolastika va Ibn Sino" />
+
+          <div className="space-y-6">
+            <InfoCard>
+              <p className="text-xl leading-relaxed mb-6">
+                O'rta asrlarda (V–XV asrlar) ta'lim ikki yo'nalishda rivojlandi: G'arbiy Yevropada
+                cherkov tomonidan boshqariladigan <strong className="text-white">sxolastik ta'lim</strong>,
+                Sharqda esa ilm-fanni olg'a surgan <strong className="text-white">musulmon olimlari maktabi</strong>.
+                Bu ikki yo'nalish bir-biridan keskin farq qilardi.
               </p>
-            </motion.div>
 
-            {/* Vertical Timeline */}
-            <div className="relative">
-              {/* Central Line */}
-              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-500 via-purple-500 via-green-500 via-blue-500 to-pink-500"></div>
+              <div className="space-y-5">
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">⛪ Sxolastika — G'arbiy Yevropa</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Sxolastika (lotincha "scholasticus" — maktabga oid) — O'rta asr Yevropasining asosiy
+                    ta'lim tizimi edi. Uning mohiyati: diniy matnlarni (Bibliya, cherkov otalari asarlari) yodlash,
+                    ularga sharh yozish va mantiqiy tarzda asoslash. O'quvchi savollamasligi, shubha bildirmasligi
+                    kerak edi — chunki haqiqat allaqachon muqaddas kitoblarda yozilgan deb hisoblangan.
+                    Natijada ijodkorlik va mustaqil fikrlash so'nib bordi.
+                  </p>
+                </div>
 
-              {eras.map((era, index) => (
-                <motion.div
-                  key={era.id}
-                  initial={{ opacity: 0, x: era.alignment === 'left' ? -50 : 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
-                  className={`relative mb-16 ${
-                    era.alignment === 'left' 
-                      ? 'md:pr-1/2 md:text-right' 
-                      : 'md:pl-1/2 md:ml-auto md:text-left'
-                  }`}
-                >
-                  {/* Timeline Dot */}
-                  <motion.div
-                    whileHover={{ scale: 1.3 }}
-                    className={`absolute left-6 md:left-1/2 w-6 h-6 -ml-3 rounded-full bg-gradient-to-r ${era.color} border-4 border-white shadow-lg z-10`}
-                  />
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🕌 Ibn Sino va Al-Farobiy — Sharq uyg'onishi</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    G'arb qorong'ulikda yotgan bir paytda, IX–XI asrlarda Markaziy Osiyo va Arab olamida
+                    ilmiy inqilob sodir bo'ldi. Ibn Sino (980–1037) nafaqat tibbiyot ensiklopediyasi —
+                    "Al-Qonun fit-Tibb" ni yozdi, balki ta'lim haqida ham chuqur fikrlar bildirdi.
+                    U bolaning psixologik xususiyatlarini hisobga olish, har bir o'quvchiga individual yondashish
+                    va bilimni hayot bilan bog'lash zarurligini ta'kidladi. Al-Farobiy (872–950) esa
+                    fanning tasnifini ishlab chiqib, qaysi fanlar qanday ketma-ketlikda o'rgatilishi kerakligini belgiladi.
+                  </p>
+                </div>
 
-                  {/* Content Card */}
-                  <div className={`ml-20 md:ml-0 ${era.alignment === 'right' ? 'md:pl-12' : 'md:pr-12'}`}>
-                    <motion.div
-                      whileHover={{ scale: 1.02, y: -5 }}
-                      className={`glass-card p-6 bg-gradient-to-br ${era.bgColor} border-2 border-gray-200`}
-                    >
-                      {/* Era Badge */}
-                      <div className={`inline-block px-4 py-2 bg-gradient-to-r ${era.color} text-white font-bold rounded-full mb-4 text-sm`}>
-                        {era.icon} {era.period}
-                      </div>
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🏰 Faqat zodagonlar uchun ta'lim</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    O'rta asrlarning eng katta kamchiligi — ta'lim faqat cherkov ruhoniylari, zodagonlar
+                    va boylar uchun mavjud edi. Oddiy dehqon va hunarmandning farzandi maktabga borishi
+                    deyarli mumkin emasdi. Yevropada savodlilik darajasi 5–10% atrofida bo'lgan.
+                    Faqat monastir maktablari biroz demokratik edi — ular yetim va kambag'al bolalarni ham
+                    o'qitardi, lekin maqsad faqat diniy xizmatga tayyorlash edi.
+                  </p>
+                </div>
+              </div>
+            </InfoCard>
 
-                      {/* Scholars */}
-                      <h3 className="text-2xl font-black text-gray-900 mb-2">
-                        {era.scholars}
-                      </h3>
+            <Example icon="📜" title="O'rta asr darsi qanday bo'lgan?">
+              O'qituvchi kitobni ovoz chiqarib o'qiydi. O'quvchilar quloq soladi va yodlaydi.
+              Savol berish — hurmatsizlik belgisi. "Nima uchun?" degan savol — bid'at.
+              Imtihon: yodlagan narsangni ayt.<br /><br />
+              <span className="text-zinc-400">Hozir ham ba'zi darslar shu ko'rinishda o'tadimi?.. 🤔</span>
+            </Example>
+          </div>
+        </motion.div>
 
-                      {/* Method */}
-                      <div className="mb-4">
-                        <span className="inline-block px-3 py-1 bg-white rounded-lg text-sm font-semibold text-gray-700 shadow-sm">
-                          {era.method}
-                        </span>
-                      </div>
+        {/* MEME 1 — Baronlar */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <MemeCard
+            src="/baronlar.jpg"
+            alt="Baronlar meme"
+            topText="O'rta asrlarda ta'lim:"
+            bottomText="Faqat biz o'qiymiz, qolganlar dalada ishlaydi!"
+            caption="💡 O'rta asrlarda savodlilik darajasi Yevropada atigi 5–10% edi. Ta'lim imtiyoz edi, huquq emas."
+          />
+        </motion.div>
 
-                      {/* Description */}
-                      <p className="text-gray-700 leading-relaxed mb-4">
-                        {era.description}
-                      </p>
+        {/* Quiz 1 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <Quiz
+            question="O'rta asrlardagi sxolastik ta'limning asosiy kamchiligi nima edi?"
+            options={[
+              "Darsliklar juda qimmat bo'lgan",
+              "Mustaqil fikrlash va ijodkorlik so'ndirilgan, faqat yodlash talab etilgan",
+              "O'qituvchilar yetarli bo'lmagan",
+              "Matematika o'rgatilmagan"
+            ]}
+            correctIndex={1}
+            explanation="Sxolastika diniy matnlarni yodlash va ularga shubhasiz bo'ysunishga asoslangan edi. Savol berish, mustaqil fikrlash man etilgan — bu ijodkorlik va ilmiy rivojlanishni to'sib qo'ydi."
+          />
+        </motion.div>
 
-                      {/* Principles (only for Komenskiy) */}
-                      {era.principles && (
-                        <div className="grid grid-cols-2 gap-2 mb-4">
-                          {era.principles.map((principle, idx) => (
-                            <div key={idx} className="text-sm text-gray-700 bg-white/60 px-2 py-1 rounded">
-                              {principle}
-                            </div>
-                          ))}
-                        </div>
-                      )}
+        {/* ══════════════════════════════════════════════
+            BLOK 3 — UYG'ONISH DAVRI VA KOMENSKIY
+        ══════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionTitle number="03" title="Uyg'onish davri — Jan Amos Komenskiy" />
 
-                      {/* Scientists (only for XIX-XX) */}
-                      {era.scientists && (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                          {era.scientists.map((sci, idx) => (
-                            <div key={idx} className="bg-white/60 p-3 rounded-lg text-center">
-                              <div className="font-bold text-gray-900 text-sm">{sci.name}</div>
-                              <div className="text-xs text-gray-600 mt-1">{sci.idea}</div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+          <div className="space-y-6">
+            <InfoCard>
+              <p className="text-xl leading-relaxed mb-6">
+                XV–XVII asrlarda Yevropada <strong className="text-white">Renessans</strong> — uyg'onish davri boshlandi.
+                Insoniyat qayta Qadimgi Yunoniston ideallariga — erkin fikrlash, ilm-fan va tabiatga murojaat etdi.
+                Ta'lim sohasida bu davrning eng buyuk islohotchisi — chex pedagogi
+                <strong className="text-white"> Jan Amos Komenskiy</strong> (1592–1670) bo'ldi.
+              </p>
 
-                      {/* Quote */}
-                      {era.quote && (
-                        <div className="bg-white/70 border-l-4 border-gray-400 p-3 rounded italic text-gray-600 text-sm mb-4">
-                          {era.quote}
-                        </div>
-                      )}
+              <div className="space-y-5">
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">📖 "Buyuk Didaktika" — 1657</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Komenskiyning asosiy asari — "Didactica Magna" ("Buyuk Didaktika") pedagogika fanining
+                    birinchi tizimli qo'llanmasi hisoblanadi. Unda u o'zining bosh g'oyasini bayon etdi:
+                    <em> "Hammaga hamma narsani o'rgatish mumkin"</em> — ya'ni ta'lim faqat elita uchun emas,
+                    barcha ijtimoiy tabaqadan bo'lgan bolalar uchun ochiq bo'lishi kerak.
+                    Bu o'sha davr uchun inqilobiy fikr edi.
+                  </p>
+                </div>
 
-                      {/* Meme */}
-                      <div className="bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-300 p-4 rounded-xl">
-                        <div className="flex items-start space-x-2">
-                          <span className="text-2xl flex-shrink-0">😄</span>
-                          <p className="text-sm text-gray-700 whitespace-pre-line">
-                            {era.meme}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🏫 Sinf-dars tizimi</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Komenskiydan oldin o'qituvchi har bir o'quvchi bilan alohida shug'ullanardi — bu juda sekin va samarasiz edi.
+                    Komenskiy <strong className="text-white">sinf-dars tizimini</strong> ixtiro qildi:
+                    bir xil yoshdagi o'quvchilarni bir sinfga yig'ish, har bir dars belgilangan vaqtda bo'lishi,
+                    o'quv yili tushum va bahor tatillari bilan bo'linishi. Bugungi maktab tizimining poydevori
+                    aynan mana shu 1657-yildagi kashfiyotdir.
+                  </p>
+                </div>
 
-            {/* Comparison Table */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2 }}
-              className="my-16"
-            >
-              <h3 className="text-3xl font-black text-center mb-8 text-gray-900">
-                📊 Tizimlarni solishtiramiz
-              </h3>
-              
-              <div className="glass-card p-6 overflow-x-auto">
-                <table className="w-full">
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">👁️ Ko'rgazmalilik tamoyili</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Komenskiy birinchi bo'lib rasmli darsliklar yaratdi — "Orbis Sensualium Pictus"
+                    ("Ko'rinadigan dunyo rasmlarda", 1658). U shunday dedi: "O'quvchiga avval narsaning o'zini
+                    ko'rsat, keyin so'zini o'rgat." Bu hozirgi ko'rgazmali qurollar, slaydlar, videodarslar —
+                    barchasining nazariy asosi. Komenskiy shuningdek tabiatga mos ta'lim tamoyilini ham asoslab berdi:
+                    ta'lim bolaning yoshi va rivojlanish darajasiga mos bo'lishi kerak.
+                  </p>
+                </div>
+              </div>
+            </InfoCard>
+
+            <Example icon="🌍" title="Komenskiyning ta'siri bugun ham seziladi">
+              Siz hozir maktabda o'qigansiz. U yerda: sinflar bor, dars jadval bo'yicha o'tadi,
+              o'quv yili sentyabrda boshlanadi, rasmli darsliklar bor, bir sinfda tengdoshlar o'tiradi.<br /><br />
+              <strong className="text-amber-300">Bularning barchasini 1657-yilda Komenskiy loyihalagan.</strong><br />
+              370 yil o'tdi — tizim hali ham ishlayapti.
+            </Example>
+          </div>
+        </motion.div>
+
+        {/* MEME 2 — Books */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <MemeCard
+            src="/books.jpg"
+            alt="Big book small book meme"
+            topText="O'rta asrlar: bitta yodlash kitobi"
+            bottomText="Komenskiy: rasmli darsliklar, sinf tizimi, ko'rgazmali qurollar..."
+            caption="💡 Komenskiy ta'limni tubdan o'zgartirdi — yodlashdan tushunishga, elitadan ommaga."
+          />
+        </motion.div>
+
+        {/* Quiz 2 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <Quiz
+            question="Jan Amos Komenskiy qaysi tizimni ixtiro qilib, zamonaviy maktabning asosini qo'ydi?"
+            options={[
+              "Individual o'qitish tizimi — har bir o'quvchi bilan alohida",
+              "Sinf-dars tizimi — tengdoshlarni birlashtirib, jadval asosida o'qitish",
+              "Masofaviy ta'lim tizimi — uyda o'qish",
+              "Imtihon tizimi — yil oxirida yagona test"
+            ]}
+            correctIndex={1}
+            explanation="Komenskiy sinf-dars tizimini joriy etdi: bir xil yoshdagi o'quvchilarni sinfga yig'ish, darslarni jadval bo'yicha o'tkazish. Bu tizim 1657-yildan beri dunyo bo'yicha ishlatiladi."
+          />
+        </motion.div>
+
+        {/* ══════════════════════════════════════════════
+            BLOK 4 — XIX–XX ASR
+        ══════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionTitle number="04" title="XIX–XX asr — Pestalotsi, Dyui, Vygotskiy" />
+
+          <div className="space-y-6">
+            <InfoCard>
+              <p className="text-xl leading-relaxed mb-6">
+                Sanoat inqilobi ta'lim sohasida ham inqilobni taqozo etdi. Fabrikalar uchun savodli ishchilar,
+                davlat uchun bilimli fuqarolar kerak edi. Shu davrda uchta buyuk pedagog ta'lim nazariyasini
+                tubdan o'zgartirib yubordi.
+              </p>
+
+              <div className="space-y-5">
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🇨🇭 Iogann Genrix Pestalotsi (1746–1827)</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Shveytsariyalik pedagog Pestalotsi ta'limda "uch birlik" g'oyasini ilgari surdi:
+                    <strong className="text-white"> Bosh + Qo'l + Yurak</strong> — ya'ni aqliy, jismoniy va axloqiy rivojlanish birgalikda bo'lishi kerak.
+                    U Shveytsariyada kambag'al bolalar uchun maktab-internatlat tashkil etdi va
+                    o'z usulini amalda sinab ko'rdi. Pestalotsi bolaga to'g'ri muomala qilish,
+                    uning his-tuyg'ularini hisobga olish zarurligi haqida birinchilardan bo'lib yozdi.
+                    Uning ishi keyinchalik "Ta'limda insonparvarlik" harakatining asosiga aylandi.
+                  </p>
+                </div>
+
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🇺🇸 Jon Dyui (1859–1952)</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Amerikalik faylasuf va pedagog Jon Dyui ta'limda inqilob qildi:
+                    <strong className="text-white"> "Learning by doing"</strong> — qilish orqali o'rganish.
+                    Dyuiga ko'ra, bola maktabda passiv o'tiruvchi emas, balki faol ishtirokchi bo'lishi kerak.
+                    U 1896-yilda Chikagoda "laboratoriya maktabi" tashkil etdi — u yerda bolalar
+                    o'qish o'rniga real loyihalar ustida ishlaydi, ovqat pishiradi, bino quradi,
+                    va bu jarayonda matematika, fizika, adabiyotni o'zlashtirishadi.
+                    Dyuining g'oyalari hozirgi proyektga asoslangan ta'lim (PBL) ning poydevori.
+                  </p>
+                </div>
+
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🇷🇺 Lev Vygotskiy (1896–1934)</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    Sovet psixologi Vygotskiy ta'lim psixologiyasiga <strong className="text-white">"Yaqin rivojlanish zonasi"</strong>
+                    (ZPD — Zone of Proximal Development) tushunchasini olib kirdi.
+                    Bu zona — bolaning hozir o'zi qila oladigan narsa bilan, kattalar yordamida qila oladigan narsa
+                    o'rtasidagi masofa. Eng samarali ta'lim aynan shu zonada amalga oshadi:
+                    juda oson bo'lsa — bola zerikadi, juda qiyin bo'lsa — ruhdan tushadi.
+                    Bundan tashqari, Vygotskiy til va ijtimoiy muhitning o'qishga ta'sirini ilmiy asoslab berdi.
+                  </p>
+                </div>
+              </div>
+            </InfoCard>
+
+            <Example icon="🔨" title="Dyui usuli — bugun ham dolzarb">
+              Agar siz robotika to'garagida dastur yozib, roboni harakat qildirgan bo'lsangiz —
+              bu Dyuining "learning by doing" usuli.<br />
+              Agar maktabda loyiha tayyorlab, taqdimot qilgan bo'lsangiz — bu ham Dyui.<br /><br />
+              <span className="text-amber-300">100 yil oldingi g'oya, bugun ham eng samarali metodlardan biri.</span>
+            </Example>
+
+            <Example icon="🧗" title="Vygotskiyning ZPD — amalda">
+              O'qituvchi 5-sinfga integral hisoblashni o'rgatmoqchi. Bu ZPD dan tashqarida — juda qiyin.<br />
+              O'qituvchi 5-sinfga 1+1 ni hisoblashni o'rgatmoqchi. Bu ZPD dan past — juda oson, zerikadi.<br /><br />
+              <strong className="text-amber-300">To'g'ri variant:</strong> biroz qiyin, lekin yordamchi savol bilan yechiladigan masala —
+              aynan shu "yaqin rivojlanish zonasi".
+            </Example>
+          </div>
+        </motion.div>
+
+        {/* ══════════════════════════════════════════════
+            BLOK 5 — XXI ASR VA XULOSA
+        ══════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionTitle number="05" title="XXI asr — Raqamli ta'lim va AI" />
+
+          <div className="space-y-6">
+            <InfoCard>
+              <p className="text-xl leading-relaxed mb-6">
+                Bugungi ta'lim inqilobi tarixdagi eng tezkor o'zgarish hisoblanadi.
+                COVID-19 pandemiyasi butun dunyo ta'limini bir kechada onlayn formatga o'tishga majbur qildi.
+                Endi masofaviy ta'lim, aralash format (blended learning), sun'iy intellekt yordamchilari —
+                bularning hammasi oddiy maktab kundaligiga kirib kelmoqda.
+              </p>
+
+              <div className="space-y-5">
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🔄 Flipped Classroom — Teskari sinf</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    An'anaviy sxema: o'qituvchi darsda tushuntiradi → o'quvchi uyda mashq qiladi.<br />
+                    Teskari sinf sxemasi: o'quvchi uyda video dars ko'radi → darsda muammo yechadi, savol beradi.
+                    Bu yondashuv dars vaqtini passiv tinglovchilikdan faol ishlashga yo'naltiradi.
+                    Tadqiqotlar ko'rsatishicha, bu usulda o'zlashtirish 15–25% ga oshadi.
+                  </p>
+                </div>
+
+                <div className="bg-zinc-800 p-6 rounded-xl">
+                  <h4 className="text-white font-bold text-lg mb-3">🤖 AI va ta'lim</h4>
+                  <p className="text-zinc-300 leading-relaxed">
+                    ChatGPT, Khanmigo, Duolingo, Coursera — bu platformalar har bir o'quvchiga
+                    individual ta'lim yo'lini taklif eta oladi. AI o'quvchining zaif tomonlarini aniqlaydi,
+                    unga mos murakkablikdagi topshiriqlar beradi, tezkor fikr-mulohaza bildiradi.
+                    Biroq texnologiya — faqat vosita. Agar uning orqasida didaktik tamoyillar bo'lmasa,
+                    eng zamonaviy AI ham samarasiz ta'lim beradi.
+                  </p>
+                </div>
+              </div>
+            </InfoCard>
+
+            {/* Solishtirma jadval */}
+            <InfoCard>
+              <h4 className="text-xl font-bold text-white mb-6">Tarixiy davrlar — qisqacha jadval</h4>
+              <div className="overflow-x-auto">
+                <table className="w-full border border-zinc-700 rounded-xl overflow-hidden text-sm">
                   <thead>
-                    <tr className="border-b-2 border-gray-300">
-                      <th className="text-left py-4 px-4 font-bold text-gray-900">Davr</th>
-                      <th className="text-left py-4 px-4 font-bold text-gray-900">Asosiy yondashuv</th>
-                      <th className="text-left py-4 px-4 font-bold text-gray-900">Markaziy figura</th>
-                      <th className="text-left py-4 px-4 font-bold text-gray-900">Zaif tomoni</th>
+                    <tr className="bg-zinc-800">
+                      <th className="border border-zinc-700 p-3 text-left text-white">Davr</th>
+                      <th className="border border-zinc-700 p-3 text-left text-white">Asosiy yondashuv</th>
+                      <th className="border border-zinc-700 p-3 text-left text-white">Markaziy figura</th>
+                      <th className="border border-zinc-700 p-3 text-left text-white">Zaif tomoni</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {comparisonData.map((row, idx) => (
-                      <motion.tr
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 2.2 + idx * 0.1 }}
-                        className={`border-b border-gray-200 ${
-                          row.highlight ? 'bg-gradient-to-r from-pink-50 to-rose-50 font-semibold' : ''
-                        }`}
-                      >
-                        <td className="py-4 px-4">
-                          <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${chipColors[row.chip]}`}>
-                            {row.period}
-                          </span>
-                        </td>
-                        <td className="py-4 px-4 text-gray-700">{row.approach}</td>
-                        <td className="py-4 px-4 text-gray-700">{row.center}</td>
-                        <td className="py-4 px-4 text-gray-600 text-sm">{row.weakness}</td>
-                      </motion.tr>
+                    {[
+                      { davr: 'Qadimgi davr', yondashuv: 'Sokrat usuli, dialog', marka: 'O\'qituvchi', zaif: 'Faqat elita uchun' },
+                      { davr: 'O\'rta asrlar', yondashuv: 'Yodlash, sxolastika', marka: 'Muqaddas matn', zaif: 'Ijodkorlik yo\'q' },
+                      { davr: 'Uyg\'onish (XVII)', yondashuv: 'Tizimli, ko\'rgazmali', marka: 'Komenskiy tizimi', zaif: 'Individual yondashuv kam' },
+                      { davr: 'XIX–XX asr', yondashuv: 'Tajriba, faoliyat', marka: 'O\'quvchi', zaif: 'Tizimlilik etishmaydi' },
+                      { davr: 'XXI asr', yondashuv: 'AI, aralash format', marka: 'Hamkorlik', zaif: 'Raqamli tengsizlik' },
+                    ].map((row, i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-zinc-900' : 'bg-zinc-800/50'}>
+                        <td className="border border-zinc-700 p-3 text-zinc-200 font-semibold">{row.davr}</td>
+                        <td className="border border-zinc-700 p-3 text-zinc-300">{row.yondashuv}</td>
+                        <td className="border border-zinc-700 p-3 text-zinc-300">{row.marka}</td>
+                        <td className="border border-zinc-700 p-3 text-zinc-400">{row.zaif}</td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </motion.section>
-
-            {/* Mini Quiz */}
-            <motion.section
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.5 }}
-              className="mb-12"
-            >
-              <div className="glass-card p-8 bg-gradient-to-br from-teal-50 to-cyan-50">
-                <div className="flex items-start space-x-3 mb-6">
-                  <span className="text-3xl">🧩</span>
-                  <div>
-                    <h4 className="text-2xl font-bold text-gray-900">Mini Test</h4>
-                    <p className="text-gray-600">Tarixni bilasizmi?</p>
-                  </div>
-                </div>
-
-                <p className="text-lg text-gray-800 font-semibold mb-6">
-                  "Buyuk Didaktika" asarini yozgan va sinf-dars tizimini joriy etgan kim?
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <button
-                    onClick={() => handleAnswer(1)}
-                    disabled={showResult}
-                    className={`p-4 rounded-xl font-medium text-left transition-all ${
-                      selectedAnswer === 1
-                        ? 'bg-red-500 text-white'
-                        : 'bg-white hover:bg-gray-50 text-gray-800'
-                    } ${showResult && 'cursor-not-allowed'}`}
-                  >
-                    Ibn Sino
-                  </button>
-                  <button
-                    onClick={() => handleAnswer(2)}
-                    disabled={showResult}
-                    className={`p-4 rounded-xl font-medium text-left transition-all ${
-                      selectedAnswer === 2
-                        ? 'bg-red-500 text-white'
-                        : 'bg-white hover:bg-gray-50 text-gray-800'
-                    } ${showResult && 'cursor-not-allowed'}`}
-                  >
-                    Jan Jak Russo
-                  </button>
-                  <button
-                    onClick={() => handleAnswer(3)}
-                    disabled={showResult}
-                    className={`p-4 rounded-xl font-medium text-left transition-all ${
-                      selectedAnswer === 3
-                        ? 'bg-green-500 text-white'
-                        : 'bg-white hover:bg-gray-50 text-gray-800'
-                    } ${showResult && 'cursor-not-allowed'}`}
-                  >
-                    Jan Amos Komenskiy ✓
-                  </button>
-                  <button
-                    onClick={() => handleAnswer(4)}
-                    disabled={showResult}
-                    className={`p-4 rounded-xl font-medium text-left transition-all ${
-                      selectedAnswer === 4
-                        ? 'bg-red-500 text-white'
-                        : 'bg-white hover:bg-gray-50 text-gray-800'
-                    } ${showResult && 'cursor-not-allowed'}`}
-                  >
-                    Lev Vygotskiy
-                  </button>
-                </div>
-
-                {showResult && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`p-4 rounded-xl ${
-                      selectedAnswer === 3
-                        ? 'bg-green-100 border-2 border-green-500'
-                        : 'bg-red-100 border-2 border-red-500'
-                    }`}
-                  >
-                    {selectedAnswer === 3 ? (
-                      <p className="text-green-800 font-semibold">✅ To'g'ri! Jan Amos Komenskiy — didaktikaning otasi!</p>
-                    ) : (
-                      <p className="text-red-800 font-semibold">❌ Noto'g'ri. To'g'ri javob: Jan Amos Komenskiy</p>
-                    )}
-                  </motion.div>
-                )}
-              </div>
-            </motion.section>
-
+            </InfoCard>
           </div>
-        </div>
-      )}
+        </motion.div>
 
-      {/* Completion Screen */}
-      <AnimatePresence>
-        {completedCourse && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center"
-          >
-            <div className="text-center px-4">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                className="text-9xl mb-8"
-              >
-                🎓
-              </motion.div>
-              <motion.h1
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-5xl md:text-7xl font-black text-white mb-6"
-              >
-                Tabriklaymiz!
-              </motion.h1>
-              <motion.p
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="text-2xl md:text-3xl text-white/90 mb-8"
-              >
-                Siz Didaktika kursini muvaffaqiyatli yakunladingiz! 🎉
-              </motion.p>
-              <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="bg-white/20 backdrop-blur-lg rounded-2xl p-8 inline-block"
-              >
-                <div className="grid grid-cols-3 gap-8 text-white">
-                  <div>
-                    <div className="text-4xl font-black">3</div>
-                    <div className="text-sm opacity-80">Mavzu o'rganildi</div>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-black">3</div>
-                    <div className="text-sm opacity-80">Test topshirildi</div>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-black">100%</div>
-                    <div className="text-sm opacity-80">Bajarildi</div>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
-                className="text-white/70 mt-8"
-              >
-                Bosh sahifaga qaytilmoqda...
-              </motion.p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+        {/* Quiz 3 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <Quiz
+            question="Vygotskiyning 'Yaqin rivojlanish zonasi' (ZPD) nimani anglatadi?"
+            options={[
+              "O'quvchi mustaqil bajara oladigan eng qiyin topshiriq",
+              "O'quvchi hozir o'zi bilgan narsa bilan kattalar yordamida bila oladigan narsa o'rtasidagi masofa",
+              "O'qituvchi va o'quvchi o'rtasidagi jismoniy masofa",
+              "O'quvchining geografik jihatdan yaqin bo'lgan maktab hududi"
+            ]}
+            correctIndex={1}
+            explanation="ZPD — o'quvchi hozir o'zi qila oladigan narsa bilan, yetakchi yordami orqali qila oladigan narsa o'rtasidagi zona. Eng samarali ta'lim aynan shu zonada sodir bo'ladi."
+          />
+        </motion.div>
+
+        {/* ── FOOTER ── */}
+        <div className="border-t border-zinc-800 pt-8 text-center">
+          <p className="text-zinc-600 text-sm">Reja 03 / 06 — Turli Tarixiy Davrlarda Didaktik Tizimlar</p>
+        </div>
+
+      </div>
+    </div>
   )
 }
 
