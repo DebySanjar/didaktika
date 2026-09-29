@@ -65,7 +65,7 @@ const WallMeme = ({ topText, bottomText, caption }) => (
   <div className="bg-zinc-900 border border-zinc-700 rounded-2xl overflow-hidden max-w-2xl mx-auto">
     <div className="relative">
       <img
-        src="https://media.giphy.com/media/7P8lA58Cg8cOzWi8db/giphy.gif"
+        src="/wall.gif"
         alt="Talking to a brick wall gif"
         className="w-full object-cover"
         style={{ maxHeight: '420px' }}

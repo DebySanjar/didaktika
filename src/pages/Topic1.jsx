@@ -66,7 +66,7 @@ const DrakeMeme = ({ noText, yesText, caption }) => (
     {/* NO panel */}
     <div className="relative">
       <img
-        src="https://i.imgflip.com/30b1gx.jpg"
+        src="/drake.jpg"
         alt="Drake meme"
         className="w-full"
         style={{ display: 'block' }}
@@ -99,7 +99,7 @@ const BrainMeme = ({ levels }) => (
       {/* Left — actual expanding brain meme image */}
       <div className="relative">
         <img
-          src="https://i.imgflip.com/1jwhww.jpg"
+          src="/expandbrain.jpg"
           alt="Expanding brain meme"
           className="w-full h-full object-cover"
           style={{ minHeight: '300px' }}
